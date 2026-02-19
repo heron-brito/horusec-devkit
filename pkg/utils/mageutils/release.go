@@ -17,16 +17,37 @@ package mageutils
 import (
 	"fmt"
 	"log"
+	"os"
 
 	"github.com/magefile/mage/mg"
 	"github.com/magefile/mage/sh"
 )
 
-// CreateAlphaTag executes "git", "tag", "-f", "-s", "alpha", "-m", "alpha"
+// isGPGSigningEnabled returns true if GPG signing should be used for tags.
+// Signing is disabled when the environment variable GIT_TAG_SIGN=false or
+// when no GPG secret keys are available on the system.
+func isGPGSigningEnabled() bool {
+	if os.Getenv("GIT_TAG_SIGN") == "false" {
+		return false
+	}
+	err := sh.Run("gpg", "--list-secret-keys")
+	return err == nil
+}
+
+// tagFlag returns "-s" when GPG signing is available, otherwise "-a".
+func tagFlag() string {
+	if isGPGSigningEnabled() {
+		return "-s"
+	}
+	return "-a"
+}
+
+// CreateAlphaTag executes "git tag -f [-s|-a] alpha -m alpha".
+// Uses a GPG-signed tag (-s) when signing is available, otherwise annotated (-a).
 func CreateAlphaTag() error {
 	mg.Deps(isGitExistent)
 
-	return sh.RunV("git", "tag", "-f", "-s", "alpha", "-m", "alpha")
+	return sh.RunV("git", "tag", "-f", tagFlag(), "alpha", "-m", "alpha")
 }
 
 // GitPushAlpha executes "git", "push", "origin", "-f", "alpha"
@@ -36,21 +57,23 @@ func GitPushAlpha() error {
 	return sh.RunV("git", "push", "origin", "-f", "alpha")
 }
 
-// CreateLocalTag executes "git", "tag", "-s", tag, "-m", "release "+tag
+// CreateLocalTag executes "git tag [-s|-a] tag -m release+tag".
+// Uses a GPG-signed tag (-s) when signing is available, otherwise annotated (-a).
 func CreateLocalTag(tag string) (err error) {
 	mg.Deps(isGitExistent)
 	mg.Deps(mg.F(isValidTag, tag))
 
-	return sh.RunV("git", "tag", "-s", tag, "-m", "release "+tag)
+	return sh.RunV("git", "tag", tagFlag(), tag, "-m", "release "+tag)
 }
 
-// CreateAndPushTag create and push a new given tag executing
-// "git tag -s tag -m release+tag" and "git push --tags"
+// CreateAndPushTag creates and pushes a tag executing
+// "git tag [-s|-a] tag -m release+tag" and "git push --tags".
+// Uses a GPG-signed tag (-s) when signing is available, otherwise annotated (-a).
 func CreateAndPushTag(tag string) (err error) {
 	mg.Deps(isGitExistent)
 	mg.Deps(mg.F(isValidTag, tag))
 
-	if err := sh.RunV("git", "tag", "-s", tag, "-m", "release "+tag); err != nil {
+	if err := sh.RunV("git", "tag", tagFlag(), tag, "-m", "release "+tag); err != nil {
 		return err
 	}
 

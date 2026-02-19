@@ -1,4 +1,4 @@
-module github.com/ZupIT/horusec-devkit
+module github.com/heron-brito/horusec-devkit
 
 go 1.17
 

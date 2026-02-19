@@ -19,7 +19,7 @@ import (
 
 	"github.com/stretchr/testify/mock"
 
-	mockUtils "github.com/ZupIT/horusec-devkit/pkg/utils/mock"
+	mockUtils "github.com/heron-brito/horusec-devkit/pkg/utils/mock"
 )
 
 type Mock struct {

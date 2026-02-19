@@ -19,9 +19,9 @@ import (
 
 	validation "github.com/go-ozzo/ozzo-validation/v4"
 
-	"github.com/ZupIT/horusec-devkit/pkg/services/broker/enums"
-	"github.com/ZupIT/horusec-devkit/pkg/utils/env"
-	"github.com/ZupIT/horusec-devkit/pkg/utils/logger"
+	"github.com/heron-brito/horusec-devkit/pkg/services/broker/enums"
+	"github.com/heron-brito/horusec-devkit/pkg/utils/env"
+	"github.com/heron-brito/horusec-devkit/pkg/utils/logger"
 )
 
 type IConfig interface {

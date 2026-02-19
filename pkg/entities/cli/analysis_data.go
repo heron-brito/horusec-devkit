@@ -17,7 +17,7 @@ package cli
 import (
 	"encoding/json"
 
-	"github.com/ZupIT/horusec-devkit/pkg/entities/analysis"
+	"github.com/heron-brito/horusec-devkit/pkg/entities/analysis"
 )
 
 type AnalysisData struct {

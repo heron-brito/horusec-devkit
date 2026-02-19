@@ -25,10 +25,10 @@ import (
 	"github.com/go-chi/cors"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 
-	"github.com/ZupIT/horusec-devkit/pkg/enums/ozzovalidation"
-	"github.com/ZupIT/horusec-devkit/pkg/services/http/router/enums"
-	"github.com/ZupIT/horusec-devkit/pkg/utils/env"
-	"github.com/ZupIT/horusec-devkit/pkg/utils/logger"
+	"github.com/heron-brito/horusec-devkit/pkg/enums/ozzovalidation"
+	"github.com/heron-brito/horusec-devkit/pkg/services/http/router/enums"
+	"github.com/heron-brito/horusec-devkit/pkg/utils/env"
+	"github.com/heron-brito/horusec-devkit/pkg/utils/logger"
 )
 
 type IRouter interface {

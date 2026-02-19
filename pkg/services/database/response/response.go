@@ -17,7 +17,7 @@ package response
 import (
 	"errors"
 
-	"github.com/ZupIT/horusec-devkit/pkg/services/database/enums"
+	"github.com/heron-brito/horusec-devkit/pkg/services/database/enums"
 )
 
 type IResponse interface {

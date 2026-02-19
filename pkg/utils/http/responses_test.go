@@ -23,8 +23,8 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	"github.com/ZupIT/horusec-devkit/pkg/utils/http/enums"
-	"github.com/ZupIT/horusec-devkit/pkg/utils/logger"
+	"github.com/heron-brito/horusec-devkit/pkg/utils/http/enums"
+	"github.com/heron-brito/horusec-devkit/pkg/utils/logger"
 )
 
 func TestStatusOK(t *testing.T) {

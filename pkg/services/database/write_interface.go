@@ -14,7 +14,7 @@
 
 package database
 
-import "github.com/ZupIT/horusec-devkit/pkg/services/database/response"
+import "github.com/heron-brito/horusec-devkit/pkg/services/database/response"
 
 type IDatabaseWrite interface {
 	StartTransaction() IDatabaseWrite
